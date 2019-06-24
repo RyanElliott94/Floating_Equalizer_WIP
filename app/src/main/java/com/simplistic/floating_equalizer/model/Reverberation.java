@@ -1,0 +1,56 @@
+/*
+ * Decompiled with CFR 0_58.
+ * 
+ * Could not load the following classes:
+ *  android.content.Context
+ *  java.lang.Object
+ *  java.lang.String
+ *  java.util.HashMap
+ */
+package com.simplistic.floating_equalizer.model;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+
+import com.simplistic.floating_equalizer.lib.HashMapAdapter;
+
+import java.util.HashMap;
+
+public class Reverberation {
+	public static final String ID = "id";
+	public static final String NAME = "name";
+	public static final int SL_REVERBPRESET_LARGEHALL = 5;
+	public static final int SL_REVERBPRESET_LARGEROOM = 3;
+	public static final int SL_REVERBPRESET_MEDIUMHALL = 4;
+	public static final int SL_REVERBPRESET_MEDIUMROOM = 2;
+	public static final int SL_REVERBPRESET_NONE = 0;
+	public static final int SL_REVERBPRESET_PLATE = 6;
+	public static final int SL_REVERBPRESET_SMALLROOM = 1;
+	protected Context mContext;
+	protected HashMap<Object, Object> mData;
+
+	public Reverberation(Context context) {
+		this.mContext = context;
+	}
+
+	@SuppressLint("ResourceType")
+	public HashMapAdapter getAdapter() {
+		HashMapAdapter hashMapAdapter = new HashMapAdapter(this.mContext,
+				17367048, this.getValues());
+		hashMapAdapter.setDropDownViewResource(17367049);
+		return hashMapAdapter;
+	}
+
+	@SuppressLint("ResourceType")
+	public HashMap<Object, Object> getValues() {
+		this.mData = new HashMap();
+		this.mData.put((0), (this.mContext.getString(2130968588)));
+		this.mData.put((1), (this.mContext.getString(2130968589)));
+		this.mData.put((2), (this.mContext.getString(2130968590)));
+		this.mData.put((3), (this.mContext.getString(2130968591)));
+		this.mData.put((4), (this.mContext.getString(2130968592)));
+		this.mData.put((5), (this.mContext.getString(2130968593)));
+		this.mData.put((6), (this.mContext.getString(2130968594)));
+		return this.mData;
+	}
+}

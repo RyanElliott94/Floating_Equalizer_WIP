@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.simplistic.floating_equalizer"
+    android:versionCode="8"
+    android:versionName="2.0" >
+
+    <uses-sdk
+        android:maxSdkVersion="29"
+        android:minSdkVersion="24"
+        android:targetSdkVersion="29" />
+
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+
+    <application
+        android:allowBackup="true"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:debuggable="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:testOnly="true"
+        android:theme="@style/mainTheme" >
+        <activity
+            android:name="com.simplistic.floating_equalizer.Options"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="com.google.android.gms.version"
+                android:value="@integer/google_play_services_version" />
+
+            <intent-filter>
+                <action android:name="android.media.action.DISPLAY_AUDIO_EFFECT_CONTROL_PANEL" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.CATEGORY_CONTENT_MUSIC" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.simplistic.floating_equalizer.Home"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.simplistic.floating_equalizer.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/whiteStatus" />
+        <activity
+            android:name="com.simplistic.floating_equalizer.EqualizerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.simplistic.floating_equalizer.FloatingEQ"
+            android:screenOrientation="portrait" />
+
+        <service
+            android:name="com.simplistic.floating_equalizer.service.Floating"
+            android:enabled="true" />
+        <service
+            android:name="com.simplistic.floating_equalizer.service.EqualizerService"
+            android:enabled="true" />
+
+        <provider
+            android:name="com.android.tools.ir.server.InstantRunContentProvider"
+            android:authorities="com.simplistic.floating_equalizer.com.android.tools.ir.server.InstantRunContentProvider"
+            android:multiprocess="true" />
+    </application>
+
+</manifest>

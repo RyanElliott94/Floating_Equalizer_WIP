@@ -1,0 +1,4 @@
+#Mon Jun 24 20:21:33 BST 2019
+base.0=C\:\\Users\\Skint_94\\StudioProjects\\20_source_from_JADX\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\3
+path.0=classes.dex
+renamed.0=classes.dex
