@@ -94,12 +94,10 @@ public class Options extends Activity implements OnClickListener {
 	case R.id.basic:
 		Intent i0 = new Intent(getApplicationContext(), EqualizerActivity.class);
 		startActivity(i0);
-		finish();
 		break;
 	case R.id.advanced:
 		Intent i1 = new Intent(getApplicationContext(), MainActivity.class);
 		startActivity(i1);
-		finish();
 		break;
 	case R.id.whatBasic:
 		basic();

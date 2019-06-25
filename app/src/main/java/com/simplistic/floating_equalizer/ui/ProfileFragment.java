@@ -45,8 +45,10 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 import com.simplistic.floating_equalizer.R;
+import com.simplistic.floating_equalizer.model.EqualizerApi;
 import com.simplistic.floating_equalizer.model.Profile;
 import com.simplistic.floating_equalizer.ui.lib.EqualizerProfile;
+import com.simplistic.floating_equalizer.ui.lib.EqualizerSettings;
 
 public class ProfileFragment extends EqualizerProfile implements
 		AdapterView.OnItemClickListener {
@@ -72,6 +74,7 @@ public class ProfileFragment extends EqualizerProfile implements
 				this.mList);
 		Object[] arrobject = new Long[] { l };
 		listUpdateAsync.execute((Long[]) arrobject);
+
 	}
 
 	@Override

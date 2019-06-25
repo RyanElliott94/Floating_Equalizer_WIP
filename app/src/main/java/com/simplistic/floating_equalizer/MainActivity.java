@@ -74,8 +74,6 @@ public class MainActivity extends FragmentActivity implements
 	protected TabHost mTabHost;
 	protected TabPagerAdapter mTabPagerAdapter;
 	protected ViewPager mViewPager;
-	private Button min;
-	private ImageButton close;
 	private NotificationUtils mNotificationUtils;
 
 	static {
@@ -105,10 +103,10 @@ public class MainActivity extends FragmentActivity implements
 
 		mNotificationUtils = new NotificationUtils(this);
 
-		min = findViewById(R.id.collapse);
-		close = findViewById(R.id.close);
 		Toolbar toolbar = findViewById(R.id.toolBar);
 		setActionBar(toolbar);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setDisplayShowTitleEnabled(false);
 
 		this.mViewPager = findViewById(R.id.pager);
 		this.mTabHost = findViewById(android.R.id.tabhost);
@@ -150,24 +148,7 @@ public class MainActivity extends FragmentActivity implements
 				.getDefaultSharedPreferences(this).edit();
 		editor.putBoolean(EqualizerApi.PREF_AUTOSTART, true);
 		editor.apply();
-		
-		min.setOnClickListener(new View.OnClickListener(){
 
-			@Override
-			public void onClick(View v) {
-				Sure();
-			}
-			
-		});
-		
-		close.setOnClickListener(new View.OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				Sure();
-			}
-			
-		});
 
 		closeFloatingIfRunning(Floating.class.getName());
 	}
@@ -235,16 +216,37 @@ public class MainActivity extends FragmentActivity implements
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem menuItem) {
-		if (menuItem.getItemId() == R.id.add_profile) {
-			mProfile.manageProfile(this, null);
+		switch (menuItem.getItemId()){
+			case android.R.id.home:
+				finish();
+				break;
+			case R.id.add_profile:
+				mProfile.manageProfile(this, null);
+				break;
+			case R.id.rate:
+				try {
+					startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.simplistic.floating_equalizer")));
+				} catch (android.content.ActivityNotFoundException anfe) {
+					startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.simplistic.floating_equalizer")));
+				}
+				break;
+			case R.id.ads:
+				try {
+					startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.simplistic.floatingequalizerpro")));
+				} catch (android.content.ActivityNotFoundException anfe) {
+					startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.simplistic.floatingequalizerpro")));
+				}
+				break;
+			case R.id.mini:
+				Intent intent = new Intent(getApplicationContext(), Floating.class);
+				intent.putExtra("advance_eq", "isFromAdvance");
+				startService(intent);
+				finish();
+				break;
+			case R.id.stop:
+				finish();
+				break;
 		}
-		if (menuItem.getItemId() == R.id.rate) {
-			try {
-			    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.simplistic.floatingequalizerpro")));
-			} catch (android.content.ActivityNotFoundException anfe) {
-			    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.simplistic.floatingequalizerpro")));
-			}
-        	}
 		return super.onOptionsItemSelected(menuItem);
 	}
 
@@ -277,6 +279,10 @@ public class MainActivity extends FragmentActivity implements
 		}
 	}
 
+	@Override
+	public void onBackPressed(){
+		Sure();
+	}
 
 	public boolean closeFloatingIfRunning(String serviceClassName){
 		final ActivityManager activityManager = (ActivityManager)getSystemService(ACTIVITY_SERVICE);

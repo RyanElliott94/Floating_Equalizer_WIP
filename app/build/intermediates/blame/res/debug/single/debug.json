@@ -748,10 +748,6 @@
         "source": "C:\\Users\\Skint_94\\StudioProjects\\20_source_from_JADX\\app\\src\\main\\res\\drawable-xxhdpi-v4\\divider.png"
     },
     {
-        "merged": "C:\\Users\\Skint_94\\StudioProjects\\20_source_from_JADX\\app\\build\\intermediates\\res\\merged\\debug\\menu-v11_main.xml.flat",
-        "source": "C:\\Users\\Skint_94\\StudioProjects\\20_source_from_JADX\\app\\src\\main\\res\\menu-v11\\main.xml"
-    },
-    {
         "merged": "C:\\Users\\Skint_94\\StudioProjects\\20_source_from_JADX\\app\\build\\intermediates\\res\\merged\\debug\\color_abc_primary_text_disable_only_material_dark.xml.flat",
         "source": "C:\\Users\\Skint_94\\.gradle\\caches\\transforms-2\\files-2.1\\8c31c6519b929a9332fe711bcaca08b5\\res\\color\\abc_primary_text_disable_only_material_dark.xml"
     },
@@ -1984,6 +1980,10 @@
         "source": "C:\\Users\\Skint_94\\.gradle\\caches\\transforms-2\\files-2.1\\8c31c6519b929a9332fe711bcaca08b5\\res\\anim\\btn_checkbox_to_unchecked_check_path_merged_animation.xml"
     },
     {
+        "merged": "C:\\Users\\Skint_94\\StudioProjects\\20_source_from_JADX\\app\\build\\intermediates\\res\\merged\\debug\\font_gruppo.ttf.flat",
+        "source": "C:\\Users\\Skint_94\\StudioProjects\\20_source_from_JADX\\app\\src\\main\\res\\font\\gruppo.ttf"
+    },
+    {
         "merged": "C:\\Users\\Skint_94\\StudioProjects\\20_source_from_JADX\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_bg3_edit.jpg.flat",
         "source": "C:\\Users\\Skint_94\\StudioProjects\\20_source_from_JADX\\app\\src\\main\\res\\drawable-xxhdpi-v4\\bg3_edit.jpg"
     },
@@ -2320,6 +2320,10 @@
         "source": "C:\\Users\\Skint_94\\.gradle\\caches\\transforms-2\\files-2.1\\8c31c6519b929a9332fe711bcaca08b5\\res\\drawable-xxhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png"
     },
     {
+        "merged": "C:\\Users\\Skint_94\\StudioProjects\\20_source_from_JADX\\app\\build\\intermediates\\res\\merged\\debug\\menu_main.xml.flat",
+        "source": "C:\\Users\\Skint_94\\StudioProjects\\20_source_from_JADX\\app\\src\\main\\res\\menu\\main.xml"
+    },
+    {
         "merged": "C:\\Users\\Skint_94\\StudioProjects\\20_source_from_JADX\\app\\build\\intermediates\\res\\merged\\debug\\drawable_mtrl_tabs_default_indicator.xml.flat",
         "source": "C:\\Users\\Skint_94\\.gradle\\caches\\transforms-2\\files-2.1\\f99daf20bfafcb78d842d77b20bc1f0c\\res\\drawable\\mtrl_tabs_default_indicator.xml"
     },
@@ -2394,6 +2398,10 @@
     {
         "merged": "C:\\Users\\Skint_94\\StudioProjects\\20_source_from_JADX\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_playlist_bg.png.flat",
         "source": "C:\\Users\\Skint_94\\StudioProjects\\20_source_from_JADX\\app\\src\\main\\res\\drawable-xxhdpi-v4\\playlist_bg.png"
+    },
+    {
+        "merged": "C:\\Users\\Skint_94\\StudioProjects\\20_source_from_JADX\\app\\build\\intermediates\\res\\merged\\debug\\font_audiowide.ttf.flat",
+        "source": "C:\\Users\\Skint_94\\StudioProjects\\20_source_from_JADX\\app\\src\\main\\res\\font\\audiowide.ttf"
     },
     {
         "merged": "C:\\Users\\Skint_94\\StudioProjects\\20_source_from_JADX\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_scrubber_track_mtrl_alpha.9.png.flat",

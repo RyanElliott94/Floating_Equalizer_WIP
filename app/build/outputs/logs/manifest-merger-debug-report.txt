@@ -243,9 +243,11 @@ ADDED from C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\src\main\And
 	android:name
 		ADDED from C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\src\main\AndroidManifest.xml:34:19-80
 activity#com.simplistic.floating_equalizer.EqualizerActivity
-ADDED from C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\src\main\AndroidManifest.xml:35:9-124
+ADDED from C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\src\main\AndroidManifest.xml:35:9-158
 	android:screenOrientation
-		ADDED from C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\src\main\AndroidManifest.xml:35:86-122
+		ADDED from C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\src\main\AndroidManifest.xml:35:120-156
+	android:theme
+		ADDED from C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\src\main\AndroidManifest.xml:35:86-119
 	android:name
 		ADDED from C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\src\main\AndroidManifest.xml:35:19-85
 activity#com.simplistic.floating_equalizer.FloatingEQ

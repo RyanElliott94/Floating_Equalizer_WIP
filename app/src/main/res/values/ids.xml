@@ -78,6 +78,8 @@
     <item type="id" name="TopBanner"/>
     <item type="id" name="preset"/>
     <item type="id" name="stop"/>
+    <item type="id" name="mini"></item>
+    <item type="id" name="reset"></item>
     <item type="id" name="hide_icon"></item>
     <item type="id" name="back_to_eq"></item>
 </resources>

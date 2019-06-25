@@ -12,7 +12,7 @@
     <item android:id="@android:id/progress">
         <clip>
             <shape>
-                <gradient android:startColor="#2ecc71" android:endColor="#2ecc71" android:angle="270.0" android:centerY="0.75" android:centerColor="#2ecc71" />
+                <gradient android:startColor="@color/colorPrimary" android:endColor="@color/colorPrimary" android:angle="270.0" android:centerY="0.75" android:centerColor="@color/colorPrimary" />
                 <corners android:topLeftRadius="5.0dip" android:topRightRadius="5.0dip" android:bottomLeftRadius="5.0dip" android:bottomRightRadius="5.0dip" />
             </shape>
         </clip>

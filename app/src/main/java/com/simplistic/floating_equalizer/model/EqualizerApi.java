@@ -14,6 +14,7 @@ package com.simplistic.floating_equalizer.model;
 
 import android.media.audiofx.BassBoost;
 import android.media.audiofx.Equalizer;
+import android.media.audiofx.PresetReverb;
 import android.media.audiofx.Virtualizer;
 
 public class EqualizerApi {
@@ -22,20 +23,26 @@ public class EqualizerApi {
 	private static Integer SESSION;
 	private static Integer[] mBandsValue;
 	private static BassBoost mBb;
+	private static  PresetReverb mRv;
 	public static Equalizer mEq;
 	private static Integer mSession;
 	private static Virtualizer mVirt;
 
 	static {
-		EqualizerApi.PRIORITY = 0;
+		EqualizerApi.PRIORITY = 00;
 		EqualizerApi.SESSION = 0;
 		EqualizerApi.PREF_AUTOSTART = "autostart";
 	}
 
 	public static void destroy() {
-		EqualizerApi.mEq.release();
-		EqualizerApi.mVirt.release();
-		EqualizerApi.mBb.release();
+		mEq.release();
+		mVirt.release();
+		mRv.release();
+		mBb.release();
+	}
+
+	public static void setReverbPreset(short preset){
+		mRv.setPreset(preset);
 	}
 
 	public static int getBandFreq(int n) {
@@ -56,6 +63,14 @@ public class EqualizerApi {
 
 	public static boolean getBassBoostEnabled() {
 		return EqualizerApi.mBb.getEnabled();
+	}
+
+	public static boolean getReverbEnabled() {
+		return EqualizerApi.mRv.getEnabled();
+	}
+
+	public static short getReverbPreset() {
+		return EqualizerApi.mRv.getPreset();
 	}
 
 	public static int getBassBoostStrength() {
@@ -91,11 +106,13 @@ public class EqualizerApi {
 			integer = EqualizerApi.SESSION;
 		}
 		EqualizerApi.mSession = integer;
-		EqualizerApi.mEq = new Equalizer(EqualizerApi.PRIORITY.intValue(),
+		EqualizerApi.mEq = new Equalizer(EqualizerApi.PRIORITY,
 				EqualizerApi.mSession.intValue());
-		EqualizerApi.mVirt = new Virtualizer(EqualizerApi.PRIORITY.intValue(),
+		EqualizerApi.mVirt = new Virtualizer(EqualizerApi.PRIORITY,
 				EqualizerApi.mSession.intValue());
-		EqualizerApi.mBb = new BassBoost(EqualizerApi.PRIORITY.intValue(),
+		EqualizerApi.mBb = new BassBoost(EqualizerApi.PRIORITY,
+				EqualizerApi.mSession.intValue());
+		EqualizerApi.mRv = new PresetReverb(EqualizerApi.PRIORITY,
 				EqualizerApi.mSession.intValue());
 		EqualizerApi.mBandsValue = new Integer[EqualizerApi.getNumberOfBands()];
 	}
@@ -133,6 +150,10 @@ public class EqualizerApi {
 
 	public static void setEqualizerEnabled(boolean bl) {
 		EqualizerApi.mEq.setEnabled(bl);
+	}
+
+	public static void setReverbEnabled(boolean bl) {
+		EqualizerApi.mRv.setEnabled(bl);
 	}
 
 	public static void setVirtualizerEnabled(boolean bl) {

@@ -10,25 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#fff"
-        >
-        <Button
-            android:id="@+id/collapse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Minimize"
-            android:paddingStart="5dp"
-            android:textColor="#000"
-            android:background="@null" />
-
-        <ImageButton
-            android:id="@+id/close"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:src="@android:drawable/sym_def_app_icon"
-            android:background="@null"
-            android:textColor="#000" />
+        android:titleTextColor="#fff"
+        android:navigationIcon="?attr/homeAsUpIndicator"
+        android:theme="@style/ToolBarBlack">
     </Toolbar>
 
     <TabHost android:id="@android:id/tabhost"

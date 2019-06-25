@@ -63,7 +63,35 @@
                     android:secondaryProgress="1000" />
                 
             </LinearLayout>
-            
+
+            <LinearLayout android:orientation="vertical"
+                android:id="@+id/reverb"
+                android:paddingTop="20.0dip"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <CheckBox android:id="@+id/reverb_enabled"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#fff"
+                    android:text="@string/virtualization_enabled" />
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#fff"
+                    android:text="@string/virtualization_description" />
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:padding="20dp">
+
+                </Spinner>
+
+            </LinearLayout>
+
         </LinearLayout>
         
     </ScrollView>

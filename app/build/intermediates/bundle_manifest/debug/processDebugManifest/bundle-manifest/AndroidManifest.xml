@@ -52,7 +52,8 @@
             android:theme="@style/whiteStatus" />
         <activity
             android:name="com.simplistic.floating_equalizer.EqualizerActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/blueStatus" />
         <activity
             android:name="com.simplistic.floating_equalizer.FloatingEQ"
             android:screenOrientation="portrait" />

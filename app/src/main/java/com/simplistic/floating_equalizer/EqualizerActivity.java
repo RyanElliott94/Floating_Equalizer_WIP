@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.media.audiofx.BassBoost;
 import android.media.audiofx.Equalizer;
+import android.media.audiofx.PresetReverb;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -29,10 +30,12 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.simplistic.floating_equalizer.model.Reverberation;
 import com.simplistic.floating_equalizer.service.Floating;
 
 import java.util.ArrayList;
@@ -54,13 +57,12 @@ BassBoost bb = null;
 
 CheckBox enabled = null;
 Equalizer eq;
-Button flat = null;
     short[] r;
 private NotificationUtils mNotificationUtils;
 int max_level = getMaxBandLevelRange();
 int min_level = getMinBandLevelRange();
 int num_sliders = 0;
-
+    PresetReverb rv;
     TextView[] slider_labels = new TextView[MAX_SLIDERS];
 
 
@@ -133,10 +135,14 @@ onCheckedChange
 @Override
 public void onCheckedChanged (CompoundButton view, boolean isChecked)
 {
-if (view == enabled)
-  {
-  eq.setEnabled(isChecked);
-  }
+if (view == enabled) {
+    if (isChecked) {
+        enabled.setText("Enabled");
+        eq.setEnabled(true);
+    } else {
+        enabled.setText("Disabled");
+    }
+}
 }
 
 /*=============================================================================
@@ -170,13 +176,14 @@ public void onCreate(Bundle savedInstanceState)
   super.onCreate(savedInstanceState);
   setContentView(R.layout.eq);
 
-
+      Toolbar toolbar = findViewById(R.id.toolBar);
+      setActionBar(toolbar);
+      getActionBar().setDisplayShowTitleEnabled(false);
+      getActionBar().setDisplayHomeAsUpEnabled(true);
       mNotificationUtils = new NotificationUtils(this);
   enabled = findViewById(R.id.enabled);
   enabled.setOnCheckedChangeListener(this);
 
-  flat = findViewById(R.id.flat);
-  flat.setOnClickListener(this);
   preset = findViewById(R.id.currentPreset);
   preset.setOnClickListener(this);
 
@@ -204,10 +211,10 @@ public void onCreate(Bundle savedInstanceState)
   list.setOnItemClickListener(this);
 
   eq = new Equalizer (100, 0);
-
   setUpEQ();
 
-  bb = new BassBoost (0, 0);
+  bb = new BassBoost (100, 0);
+
   if (bb != null)
     {
         getBass();
@@ -260,6 +267,7 @@ public void setUpEQ(){
 	      }
 	    }else{
 	    	eq.getEnabled();
+         enabled.setText("Disbaled");
 	    }
 	  for (int i = num_sliders ; i < MAX_SLIDERS; i++)
 	    {
@@ -300,27 +308,27 @@ public boolean onOptionsItemSelected(MenuItem item)
  {
  switch (item.getItemId())
    {
- case R.id.rate:
+       case R.id.reset:
+           setFlat();
+           break;
+ case R.id.ads:
 		try {
-		    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.simplistic.floating_equalizer")));
+		    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.simplistic.floatingequalizerpro")));
 		} catch (android.content.ActivityNotFoundException anfe) {
-		    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.simplistic.floating_equalizer")));
+		    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.simplistic.floatingequalizerpro")));
 		}
 		return true;
- case R.id.ads:
- 		try {
-			    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.simplistic.floatingequalizerpro")));
-			} catch (android.content.ActivityNotFoundException anfe) {
-			    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.simplistic.floatingequalizerpro")));
-			}
- 		return true;
+ case R.id.mini:
+     saveEqualizer();
+     saveBass();
+     Intent intent = new Intent(getApplicationContext(), Floating.class);
+     intent.putExtra("basic_eq", "isFromBasic");
+     startService(intent);
+     finish();
+     break;
  	case R.id.stop:
-     Exit();
-     return true;
- 	case R.id.action_settings:
- 		Intent i = new Intent(getApplicationContext(), Home.class);
-		startActivity(i);
- 		return true;
+     Sure();
+     break;
    }
  return super.onOptionsItemSelected(item);
  }
@@ -598,7 +606,7 @@ public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 	preset.setVisibility(View.VISIBLE);
 	for (int i = 0; i < num_sliders && i < MAX_SLIDERS; i++)
     {
-     sliders[i].setProgress(eq.getCurrentPreset());
+     updateSliders();
 	sliders[i].setVisibility(View.GONE);
 	slider_labels[i].setVisibility(View.GONE);
     }

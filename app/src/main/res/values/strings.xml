@@ -39,5 +39,7 @@
     <string name="stop1">Exit</string>
     <string name="stop2">Exit</string>
     <string name="hide">Hide Icon</string>
+    <string name="mini">Minimize</string>
+    <string name="reset">Reset</string>
     <string name="backToEQ">Back To EQ</string>
 </resources>

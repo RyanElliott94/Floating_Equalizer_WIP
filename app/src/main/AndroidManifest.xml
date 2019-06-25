@@ -32,7 +32,7 @@
         </activity>
         <activity android:name="com.simplistic.floating_equalizer.Home" android:screenOrientation="portrait"/>
         <activity android:name="com.simplistic.floating_equalizer.MainActivity" android:theme="@style/whiteStatus" android:screenOrientation="portrait"/>
-        <activity android:name="com.simplistic.floating_equalizer.EqualizerActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.simplistic.floating_equalizer.EqualizerActivity" android:theme="@style/blueStatus" android:screenOrientation="portrait"/>
         <activity android:name="com.simplistic.floating_equalizer.FloatingEQ" android:screenOrientation="portrait"/>
         <service android:enabled="true" android:name="com.simplistic.floating_equalizer.service.Floating"/>
 
