@@ -62,46 +62,14 @@ int min_level = getMinBandLevelRange();
 int num_sliders = 0;
     PresetReverb rv;
     TextView[] slider_labels = new TextView[MAX_SLIDERS];
-
-
     SeekBar[] sliders = new SeekBar[MAX_SLIDERS];
-
 private SharedPreferences sp;
 
 private String[] music_styles;
 
 private ListView list;
-ArrayList<Integer> bandProgress = new ArrayList<Integer>();
-
 private TextView preset;
 
-
-public void Exit() {
-    AlertDialog.Builder builder = new AlertDialog.Builder((this));
-    builder.setTitle("Sure?");
-    builder.setMessage("Are you sure you'd like to exit?");
-    builder.setCancelable(true);
-    builder.setIcon(R.drawable.ic_launcher);
-    builder.setNegativeButton("No", new DialogInterface.OnClickListener(){
-    @Override
-		public void onClick(DialogInterface dialogInterface2, int dialogInterface) {
-        }
-    });
-
-    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
-        @Override
-		public void onClick(DialogInterface dialogInterface2, int dialogInterface) {
-        	releaseEqualizer();
-
-//            NotificationCompat.Builder nb = mNotificationUtils.
-//                    getAndroidChannelNotification("Floating Equalizer", "", this.getClass());
-//
-//            mNotificationUtils.getManager().cancelAll();
-            finish();
-        }
-    });
-    builder.create().show();
-}
 
 /*=============================================================================
 formatBandLabel
@@ -306,6 +274,9 @@ public boolean onOptionsItemSelected(MenuItem item)
  {
  switch (item.getItemId())
    {
+       case android.R.id.home:
+           finish();
+           break;
        case R.id.reset:
            setFlat();
            break;
@@ -493,9 +464,9 @@ showAbout
 public void Sure() {
     MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder((this));
     builder.setTitle(("Please Choose:"));
-    builder.setMessage(("Keep running: This will keep both the EQ and the Floating Icon running\n\nClose EQ: This will close both the EQ and the floating button"));
+    builder.setMessage(("Float it!: This will keep both the EQ and the Floating Icon running\n\nClose EQ: This will close both the EQ and the floating button"));
     builder.setCancelable(true);
-    builder.setIcon(R.drawable.ic_launcher);
+    builder.setIcon(R.mipmap.ic_launcher);
     builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
 
         @Override
@@ -576,6 +547,7 @@ enabled.setChecked(eq.getEnabled());
             if (runningServiceInfo.service.getClassName().equals(serviceClassName)){
                 Intent intent = new Intent(getApplicationContext(), Floating.class);
                 stopService(intent);
+                mNotificationUtils.getManager().cancelAll();
                 return true;
             }
         }

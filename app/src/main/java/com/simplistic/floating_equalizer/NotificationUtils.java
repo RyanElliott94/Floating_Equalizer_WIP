@@ -56,7 +56,7 @@ public class NotificationUtils extends ContextWrapper {
                     .setContentTitle(title)
                     .setContentText(body)
                     .setContentIntent(pi)
-                    .setSmallIcon(R.drawable.ic_launcher)
+                    .setSmallIcon(R.mipmap.ic_launcher)
                     .setAutoCancel(false);
         }else{
             Intent intent = new Intent(this, (className.getClass()));
@@ -64,11 +64,10 @@ public class NotificationUtils extends ContextWrapper {
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 1000, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             builder = new NotificationCompat.Builder(this, ANDROID_CHANNEL_ID)
-                    .setSmallIcon(R.drawable.ic_launcher)
+                    .setSmallIcon(R.mipmap.ic_launcher)
                     .setContentTitle(title)
                     .setContentText(body)
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                    // Set the intent that will fire when the user taps the notification
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .setContentIntent(pendingIntent)
                     .setAutoCancel(true);
             NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);

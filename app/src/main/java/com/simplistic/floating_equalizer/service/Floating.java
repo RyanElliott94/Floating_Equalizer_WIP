@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Intent;
 import android.graphics.PixelFormat;
+import android.os.Build;
 import android.os.IBinder;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -21,6 +22,7 @@ import com.simplistic.floating_equalizer.EqualizerActivity;
 import com.simplistic.floating_equalizer.MainActivity;
 import com.simplistic.floating_equalizer.NotificationUtils;
 import com.simplistic.floating_equalizer.R;
+import com.simplistic.floating_equalizer.model.EqualizerApi;
 
 public class Floating extends Service {
 
@@ -38,6 +40,7 @@ public class Floating extends Service {
 	NotificationCompat.Builder nb;
 	String basicEQ;
 	String advanceEQ;
+	WindowManager.LayoutParams myParams;
 	/*
 	 * Enabled aggressive block sorting
 	 * Enabled unnecessary exception pruning
@@ -59,15 +62,26 @@ public class Floating extends Service {
 
 		chatHead = new ImageView(this);
 		//a face floating bubble as imageView
-		chatHead.setImageResource(R.drawable.ic_launcher);
+		chatHead.setImageResource(R.mipmap.ic_launcher);
 		windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
 		//here is all the science of params
-		final WindowManager.LayoutParams myParams = new WindowManager.LayoutParams(
-				WindowManager.LayoutParams.WRAP_CONTENT,
-				WindowManager.LayoutParams.WRAP_CONTENT,
-				WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-				WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-				PixelFormat.TRANSLUCENT);
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			myParams = new WindowManager.LayoutParams(
+					WindowManager.LayoutParams.WRAP_CONTENT,
+					WindowManager.LayoutParams.WRAP_CONTENT,
+					WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+					WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+					PixelFormat.TRANSLUCENT);
+		} else {
+			myParams = new WindowManager.LayoutParams(
+					WindowManager.LayoutParams.WRAP_CONTENT,
+					WindowManager.LayoutParams.WRAP_CONTENT,
+					WindowManager.LayoutParams.TYPE_PHONE,
+					WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+					PixelFormat.TRANSLUCENT);
+		}
+
 		myParams.gravity = Gravity.TOP | Gravity.LEFT;
 		myParams.x = 0;
 		myParams.y = 100;

@@ -176,9 +176,9 @@ public class MainActivity extends FragmentActivity implements
 	public void Sure() {
 		MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder((this));
 		builder.setTitle(("Please Choose:"));
-		builder.setMessage(("Keep running: This will keep both the EQ and the Floating Icon running\n\nClose EQ: This will close both the EQ and the floating button"));
+		builder.setMessage(("Float it!: This will keep both the EQ and the Floating Icon running\n\nClose EQ: This will close both the EQ and the floating button"));
 		builder.setCancelable(true);
-		builder.setIcon(R.drawable.ic_launcher);
+		builder.setIcon(R.mipmap.ic_launcher);
 		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
 
 			@Override
@@ -292,6 +292,7 @@ public class MainActivity extends FragmentActivity implements
 			if (runningServiceInfo.service.getClassName().equals(serviceClassName)){
 				Intent intent = new Intent(getApplicationContext(), Floating.class);
 				stopService(intent);
+				mNotificationUtils.getManager().cancelAll();
 				return true;
 			}
 		}

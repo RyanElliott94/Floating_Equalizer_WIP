@@ -8,6 +8,8 @@
     <string name="bass_boost_description">Bass boost is an audio effect to boost or amplify low frequencies of the sound.</string>
     <string name="virtualization_enabled">Virtualization</string>
     <string name="virtualization_description">Virtualization is an audio effect to virtualize audio channels.</string>
+    <string name="loud_enabled">Speaker Booster</string>
+    <string name="loud_description">Speaker Booster is an audio effect for increasing audio loudness</string>
     <string name="reverb_enabled">Reverberation</string>
     <string name="reverb_description">A Reverb simulates the component of sound that results from reflections from surrounding walls or objects.</string>
     <string name="equalizer_enabled">Enabled</string>

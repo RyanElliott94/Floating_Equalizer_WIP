@@ -17,31 +17,17 @@
 package com.simplistic.floating_equalizer.ui;
 
 
-import android.media.AudioFormat;
-import android.media.AudioManager;
-import android.media.AudioTrack;
-import android.media.audiofx.AudioEffect;
-import android.media.audiofx.EnvironmentalReverb;
-import android.media.audiofx.PresetReverb;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
-import android.widget.Spinner;
 
 import com.simplistic.floating_equalizer.R;
 import com.simplistic.floating_equalizer.model.EqualizerApi;
-import com.simplistic.floating_equalizer.model.Reverberation;
 import com.simplistic.floating_equalizer.ui.lib.EqualizerSettings;
-import com.simplistic.floating_equalizer.ui.lib.PlaybackRunnable;
-
-import static android.content.Context.AUDIO_SERVICE;
 
 public class EffectsFragment extends EqualizerSettings {
 	protected CheckBox mBassBoostCheckbox;

@@ -13,7 +13,7 @@
         <item name="popupMenuStyle">@style/Widget.MaterialComponents.PopupMenu</item>
         <item name="android:contextPopupMenuStyle">@style/Widget.MaterialComponents.PopupMenu.ContextMenu</item>
         <item name="actionOverflowMenuStyle">@style/Widget.MaterialComponents.PopupMenu.Overflow</item>
-        <item name="android:enforceStatusBarContrast">true</item>
+        <item name="android:enforceStatusBarContrast" tools:targetApi="q">true</item>
         <item name="isMaterialTheme">true</item>
         <item name="colorAccent">@color/colorPrimary</item>
         <item name="android:colorAccent">@color/colorPrimary</item>
@@ -23,14 +23,18 @@
     <style name="whiteStatus" parent="mainTheme">
         <item name="android:colorControlNormal">#fff</item>
         <item name="android:navigationBarColor">#243342</item>
-        <item name="android:enforceStatusBarContrast">true</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:statusBarColor">#fff</item>
     </style>
 
+    <style name="optionTheme" parent="mainTheme">
+        <item name="android:navigationBarColor">#243342</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:statusBarColor">#243342</item>
+    </style>
+
     <style name="blueStatus" parent="mainTheme">
-        <item name="android:navigationBarColor" tools:targetApi="o_mr1">#fff</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:navigationBarColor">#000</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:statusBarColor">#243342</item>
     </style>
