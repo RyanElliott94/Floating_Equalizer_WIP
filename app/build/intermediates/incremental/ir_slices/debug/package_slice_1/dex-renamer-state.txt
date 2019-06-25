@@ -1,4 +1,4 @@
-#Tue Jun 25 16:39:14 BST 2019
+#Tue Jun 25 20:57:27 BST 2019
 base.0=C\:\\Users\\Skint_94\\StudioProjects\\20_source_from_JADX\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\1
 path.0=classes.dex
 renamed.0=classes.dex

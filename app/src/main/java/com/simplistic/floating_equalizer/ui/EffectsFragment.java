@@ -17,10 +17,14 @@
 package com.simplistic.floating_equalizer.ui;
 
 
+import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
+import android.media.audiofx.AudioEffect;
+import android.media.audiofx.EnvironmentalReverb;
 import android.media.audiofx.PresetReverb;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,14 +39,37 @@ import com.simplistic.floating_equalizer.R;
 import com.simplistic.floating_equalizer.model.EqualizerApi;
 import com.simplistic.floating_equalizer.model.Reverberation;
 import com.simplistic.floating_equalizer.ui.lib.EqualizerSettings;
+import com.simplistic.floating_equalizer.ui.lib.PlaybackRunnable;
 
-public class EffectsFragment extends EqualizerSettings implements AdapterView.OnItemSelectedListener, PresetReverb.OnParameterChangeListener {
+import static android.content.Context.AUDIO_SERVICE;
+
+public class EffectsFragment extends EqualizerSettings {
 	protected CheckBox mBassBoostCheckbox;
 	protected SeekBar mBassBoostSeekBar;
-	protected Spinner mReverberationSpinner;
-	protected CheckBox mReverbCheckbox;
 	protected CheckBox mVirtualizerCheckbox;
 	protected SeekBar mVirtualizerSeekBar;
+	protected CheckBox mLoudCheckbox;
+	protected SeekBar mLoudSeekBar;
+
+	protected void initUi() {
+		EqualizerApi.getEqualizerEnabled();
+		mBassBoostCheckbox = getView()
+				.findViewById(R.id.bass_boost_enabled);
+		mBassBoostSeekBar = getView()
+				.findViewById(R.id.bass_boost_val);
+		mVirtualizerCheckbox = getView()
+				.findViewById(R.id.virtualization_enabled);
+		mVirtualizerSeekBar = getView()
+				.findViewById(R.id.virtualization_val);
+		mLoudCheckbox = getView()
+				.findViewById(R.id.loud_enabled);
+		mLoudSeekBar = getView()
+				.findViewById(R.id.loud_val);
+		initBassBoostUiEvents();
+		initVirtualizerUiEvents();
+		initLoudUiEvents();
+	}
+
 	protected void fetchValues() {
 		boolean bl = EqualizerApi.getBassBoostEnabled();
 		mBassBoostCheckbox.setChecked(bl);
@@ -53,77 +80,38 @@ public class EffectsFragment extends EqualizerSettings implements AdapterView.On
 		mVirtualizerSeekBar.setProgress(EqualizerApi
 				.getVirtualizerStrength());
 		mVirtualizerSeekBar.setEnabled(bl2);
-		boolean bl3 = EqualizerApi.getReverbEnabled();
-		mReverbCheckbox.setChecked(bl3);
+		boolean bl4 = EqualizerApi.getLoudEnabled();
+		mLoudCheckbox.setChecked(bl4);
 	}
 
 	protected void initBassBoostUiEvents() {
 		mBassBoostCheckbox
-		.setOnCheckedChangeListener((new CompoundButton.OnCheckedChangeListener() {
-
-			@Override
-			public void onCheckedChanged(CompoundButton compoundButton,
-					boolean bl) {
-				EqualizerApi.setBassBoostEnabled(bl);
-				mBassBoostSeekBar.setEnabled(bl);
-			}
-		}));
-		mBassBoostSeekBar
-		.setOnSeekBarChangeListener((new SeekBar.OnSeekBarChangeListener() {
-
-			@Override
-			public void onProgressChanged(SeekBar seekBar2, int n,
-					boolean seekBar) {
-				EqualizerApi.setBassBoostStrength(n);
-			}
-
-			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {
-			}
-
-			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {
-			}
-		}));
-	}
-
-	protected void initReverberationSpinner() {
-		mReverberationSpinner = getView().findViewById(R.id.spinner);
-// Create an ArrayAdapter using the string array and a default spinner layout
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
-				R.array.reverb_array, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-		mReverberationSpinner.setAdapter(adapter);
-		mReverberationSpinner.setOnItemSelectedListener(this);
-
-		mReverbCheckbox
 				.setOnCheckedChangeListener((new CompoundButton.OnCheckedChangeListener() {
 
 					@Override
 					public void onCheckedChanged(CompoundButton compoundButton,
 												 boolean bl) {
-						EqualizerApi.setReverbEnabled(bl);
+						EqualizerApi.setBassBoostEnabled(bl);
+						mBassBoostSeekBar.setEnabled(bl);
 					}
 				}));
-	}
+		mBassBoostSeekBar
+				.setOnSeekBarChangeListener((new SeekBar.OnSeekBarChangeListener() {
 
-	protected void initUi() {
-		EqualizerApi.getEqualizerEnabled();
-		mBassBoostCheckbox = getView()
-				.findViewById(R.id.bass_boost_enabled);
-		mBassBoostSeekBar = getView()
-				.findViewById(R.id.bass_boost_val);
-		mVirtualizerCheckbox = getView()
-				.findViewById(R.id.virtualization_enabled);
-		mReverbCheckbox = getView()
-				.findViewById(R.id.reverb_enabled);
-		mVirtualizerSeekBar = getView()
-				.findViewById(R.id.virtualization_val);
-		initBassBoostUiEvents();
-		initVirtualizerUiEvents();
-		initReverberationSpinner();
+					@Override
+					public void onProgressChanged(SeekBar seekBar2, int n,
+												  boolean seekBar) {
+						EqualizerApi.setBassBoostStrength(n);
+					}
+
+					@Override
+					public void onStartTrackingTouch(SeekBar seekBar) {
+					}
+
+					@Override
+					public void onStopTrackingTouch(SeekBar seekBar) {
+					}
+				}));
 	}
 
 	protected void initVirtualizerUiEvents() {
@@ -156,6 +144,57 @@ public class EffectsFragment extends EqualizerSettings implements AdapterView.On
 		}));
 	}
 
+	protected void initLoudUiEvents() {
+		mLoudCheckbox
+				.setOnCheckedChangeListener((new CompoundButton.OnCheckedChangeListener() {
+
+					@Override
+					public void onCheckedChanged(CompoundButton compoundButton,
+												 boolean bl) {
+						EqualizerApi.setLoudEnabled(bl);
+						mLoudSeekBar.setEnabled(bl);
+					}
+				}));
+		mLoudSeekBar
+				.setOnSeekBarChangeListener((new SeekBar.OnSeekBarChangeListener() {
+
+					@Override
+					public void onProgressChanged(SeekBar seekBar2, int n,
+												  boolean seekBar) {
+						EqualizerApi.setLoudGain(n);
+					}
+
+					@Override
+					public void onStartTrackingTouch(SeekBar seekBar) {
+					}
+
+					@Override
+					public void onStopTrackingTouch(SeekBar seekBar) {
+					}
+				}));
+	}
+
+//	protected void initReverberationSpinner() {
+//		mReverberationSpinner = getView().findViewById(R.id.spinner);
+//
+//		rv = new Reverberation(getContext());
+//		mReverberationSpinner.setAdapter(rv.getAdapter());
+//		mReverberationSpinner.setOnItemSelectedListener(this);
+//
+//		mReverbCheckbox
+//				.setOnCheckedChangeListener((new CompoundButton.OnCheckedChangeListener() {
+//
+//					@Override
+//					public void onCheckedChanged(CompoundButton compoundButton,
+//												 boolean bl) {
+//						if(bl){
+//							EqualizerApi.setReverbEnabled(true);
+//						}else{
+//							EqualizerApi.setReverbEnabled(false);
+//						}
+//					}
+//				}));
+//	}
 	@Override
 	public void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
@@ -184,33 +223,23 @@ public class EffectsFragment extends EqualizerSettings implements AdapterView.On
 		fetchValues();
 	}
 
-	@Override
-	public void onItemSelected(AdapterView<?> parent, View view,
-							   int pos, long id) {
-		if(pos == 0){
-			EqualizerApi.setReverbPreset(PresetReverb.PRESET_NONE);
-		}else if(pos == 1){
-			EqualizerApi.setReverbPreset(PresetReverb.PRESET_LARGEHALL);
-		}else if(pos == 2){
-			EqualizerApi.setReverbPreset(PresetReverb.PRESET_LARGEROOM);
-		}else if(pos == 3){
-			EqualizerApi.setReverbPreset(PresetReverb.PRESET_MEDIUMHALL);
-		}else if(pos == 4){
-			EqualizerApi.setReverbPreset(PresetReverb.PRESET_MEDIUMROOM);
-		}else if(pos == 5){
-			EqualizerApi.setReverbPreset(PresetReverb.PRESET_PLATE);
-		}else if(pos == 6){
-			EqualizerApi.setReverbPreset(PresetReverb.PRESET_SMALLROOM);
-		}
-	}
-
-	@Override
-	public void onNothingSelected(AdapterView<?> adapterView) {
-
-	}
-
-	@Override
-	public void onParameterChange(PresetReverb presetReverb, int i, int i1, short i2) {
-		presetReverb.getPreset();
-	}
+//	@Override
+//	public void onItemSelected(AdapterView<?> parent, View view,
+//							   int pos, long id) {
+//		if(pos == 0){
+//			EqualizerApi.setReverbPreset(PresetReverb.PRESET_NONE);
+//		}else if(pos == 1){
+//			EqualizerApi.setReverbPreset(PresetReverb.PRESET_SMALLROOM);
+//		}else if(pos == 2){
+//			EqualizerApi.setReverbPreset((short) Reverberation.SL_REVERBPRESET_MEDIUMROOM);
+//		}else if(pos == 3){
+//			EqualizerApi.setReverbPreset((short) Reverberation.SL_REVERBPRESET_LARGEROOM);
+//		}else if(pos == 4){
+//			EqualizerApi.setReverbPreset((short) Reverberation.SL_REVERBPRESET_MEDIUMHALL);
+//		}else if(pos == 5){
+//			EqualizerApi.setReverbPreset(PresetReverb.PRESET_LARGEHALL);
+//		}else if(pos == 6){
+//			EqualizerApi.setReverbPreset((short) Reverberation.SL_REVERBPRESET_PLATE);
+//		}
+//	}
 }

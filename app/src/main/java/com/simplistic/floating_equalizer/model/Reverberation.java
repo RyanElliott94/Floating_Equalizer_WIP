@@ -12,6 +12,7 @@ package com.simplistic.floating_equalizer.model;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
+import com.simplistic.floating_equalizer.R;
 import com.simplistic.floating_equalizer.lib.HashMapAdapter;
 
 import java.util.HashMap;
@@ -41,16 +42,15 @@ public class Reverberation {
 		return hashMapAdapter;
 	}
 
-	@SuppressLint("ResourceType")
 	public HashMap<Object, Object> getValues() {
 		this.mData = new HashMap();
-		this.mData.put((0), (this.mContext.getString(2130968588)));
-		this.mData.put((1), (this.mContext.getString(2130968589)));
-		this.mData.put((2), (this.mContext.getString(2130968590)));
-		this.mData.put((3), (this.mContext.getString(2130968591)));
-		this.mData.put((4), (this.mContext.getString(2130968592)));
-		this.mData.put((5), (this.mContext.getString(2130968593)));
-		this.mData.put((6), (this.mContext.getString(2130968594)));
+		this.mData.put((0), this.mContext.getString(R.string.reverbpreset_none));
+		this.mData.put((1), this.mContext.getString(R.string.reverbpreset_smallroom));
+		this.mData.put((2), this.mContext.getString(R.string.reverbpreset_mediumroom));
+		this.mData.put((3), this.mContext.getString(R.string.reverbpreset_largeroom));
+		this.mData.put((4), this.mContext.getString(R.string.reverbpreset_mediumhall));
+		this.mData.put((5), this.mContext.getString(R.string.reverbpreset_largehall));
+		this.mData.put((6), this.mContext.getString(R.string.reverbpreset_plate));
 		return this.mData;
 	}
 }

@@ -1490,6 +1490,9 @@ id line3
 id listLayout
 id listMode
 id list_item
+id loud_enabled
+id loud_val
+id louder
 id masked
 id media_actions
 id message
@@ -1543,8 +1546,6 @@ id progress_horizontal
 id radio
 id rate
 id reset
-id reverb
-id reverb_enabled
 id right
 id right_icon
 id right_side

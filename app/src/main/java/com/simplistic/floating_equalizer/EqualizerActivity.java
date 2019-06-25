@@ -21,7 +21,6 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -35,7 +34,6 @@ import android.widget.Toolbar;
 import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.simplistic.floating_equalizer.model.Reverberation;
 import com.simplistic.floating_equalizer.service.Floating;
 
 import java.util.ArrayList;

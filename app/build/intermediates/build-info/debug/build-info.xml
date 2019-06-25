@@ -5,34 +5,33 @@
     build-mode="COLD"
     density="420dpi"
     format="10"
-    ir-eligibility="STATIC_INITIALIZER_CHANGE"
+    ir-eligibility="COMPATIBLE"
     plugin-version="3.4.1"
-    timestamp="1561477958788"
+    timestamp="1561492841021"
     token="4406621109625609326"
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="227" />
+        duration="514" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="6" />
+        duration="11" />
     <task
         name="verifier"
-        duration="2" />
+        duration="5" />
 
     <artifact
-        location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
+        location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\split-apk\debug\slices\slice_3.apk"
         type="SPLIT" />
 
     <build
         build-mode="FULL"
-        ir-eligibility="R_CLASS_CHANGE"
-        timestamp="1561464081079"
-        verifier="COLD_SWAP_REQUESTED" >
+        timestamp="1561482354473"
+        verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\resources\instant-run\debug\resources-debug.apk"
             type="SPLIT" />
@@ -43,13 +42,13 @@
             location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\split-apk\debug\slices\slice_1.apk"
             type="SPLIT" />
         <artifact
+            location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\split-apk\debug\slices\slice_9.apk"
+            type="SPLIT" />
+        <artifact
             location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\split-apk\debug\slices\slice_0.apk"
             type="SPLIT" />
         <artifact
             location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\split-apk\debug\slices\slice_2.apk"
-            type="SPLIT" />
-        <artifact
-            location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\split-apk\debug\slices\slice_5.apk"
             type="SPLIT" />
         <artifact
             location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
@@ -58,33 +57,25 @@
             location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\split-apk\debug\slices\slice_3.apk"
             type="SPLIT" />
         <artifact
-            location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\split-apk\debug\slices\slice_7.apk"
+            location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\split-apk\debug\slices\slice_5.apk"
             type="SPLIT" />
         <artifact
             location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\split-apk\debug\slices\slice_6.apk"
             type="SPLIT" />
         <artifact
+            location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\split-apk\debug\slices\slice_7.apk"
+            type="SPLIT" />
+        <artifact
             location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\split-apk\debug\slices\slice_8.apk"
             type="SPLIT" />
         <artifact
-            location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\split-apk\debug\slices\slice_9.apk"
-            type="SPLIT" />
-        <artifact
             location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\instant-run-apk\debug\app-debug.apk"
             type="SPLIT_MAIN" />
     </build>
     <build
         build-mode="COLD"
-        timestamp="1561471477881"
-        verifier="BINARY_MANIFEST_FILE_CHANGE" >
-        <artifact
-            location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\instant-run-apk\debug\app-debug.apk"
-            type="SPLIT_MAIN" />
-    </build>
-    <build
-        build-mode="COLD"
-        ir-eligibility="CLASS_ADDED"
-        timestamp="1561477151731"
+        ir-eligibility="R_CLASS_CHANGE"
+        timestamp="1561492645011"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\resources\instant-run\debug\resources-debug.apk"
@@ -93,9 +84,6 @@
             location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\split-apk\debug\slices\slice_1.apk"
             type="SPLIT" />
         <artifact
-            location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\split-apk\debug\slices\slice_9.apk"
-            type="SPLIT" />
-        <artifact
             location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\split-apk\debug\slices\slice_2.apk"
             type="SPLIT" />
         <artifact
@@ -105,25 +93,28 @@
             location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\split-apk\debug\slices\slice_7.apk"
             type="SPLIT" />
         <artifact
+            location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\split-apk\debug\slices\slice_9.apk"
+            type="SPLIT" />
+        <artifact
             location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\split-apk\debug\slices\slice_8.apk"
             type="SPLIT" />
     </build>
     <build
         build-mode="COLD"
-        ir-eligibility="METHOD_ADDED"
-        timestamp="1561477683767"
+        ir-eligibility="IMPLEMENTED_INTERFACES_CHANGE"
+        timestamp="1561492776234"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
-            location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\split-apk\debug\slices\slice_3.apk"
+            location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
             type="SPLIT" />
     </build>
     <build
         build-mode="COLD"
-        ir-eligibility="STATIC_INITIALIZER_CHANGE"
-        timestamp="1561477958788"
+        ir-eligibility="COMPATIBLE"
+        timestamp="1561492841021"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
-            location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
+            location="C:\Users\Skint_94\StudioProjects\20_source_from_JADX\app\build\intermediates\split-apk\debug\slices\slice_3.apk"
             type="SPLIT" />
     </build>
 

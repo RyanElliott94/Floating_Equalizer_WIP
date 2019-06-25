@@ -14,6 +14,7 @@ package com.simplistic.floating_equalizer.model;
 
 import android.media.audiofx.BassBoost;
 import android.media.audiofx.Equalizer;
+import android.media.audiofx.LoudnessEnhancer;
 import android.media.audiofx.PresetReverb;
 import android.media.audiofx.Virtualizer;
 
@@ -24,21 +25,23 @@ public class EqualizerApi {
 	private static Integer[] mBandsValue;
 	private static BassBoost mBb;
 	private static  PresetReverb mRv;
+	private  static  LoudnessEnhancer mLe;
 	public static Equalizer mEq;
 	private static Integer mSession;
 	private static Virtualizer mVirt;
 
 	static {
-		EqualizerApi.PRIORITY = 00;
-		EqualizerApi.SESSION = 0;
-		EqualizerApi.PREF_AUTOSTART = "autostart";
+		PRIORITY = 0;
+		SESSION = 0;
+		PREF_AUTOSTART = "autostart";
 	}
 
 	public static void destroy() {
 		mEq.release();
 		mVirt.release();
-		mRv.release();
+//		mRv.release();
 		mBb.release();
+		mLe.release();
 	}
 
 	public static void setReverbPreset(short preset){
@@ -47,7 +50,7 @@ public class EqualizerApi {
 
 	public static int getBandFreq(int n) {
 		short s = (short) (Math.ceil(((n / 2))));
-		int n2 = EqualizerApi.mEq.getCenterFreq(s);
+		int n2 = mEq.getCenterFreq(s);
 		int n3 = (30 * n2 / 100);
 		if (((n + 1) % 2) != 0)
 			return (n2 - n3);
@@ -55,66 +58,71 @@ public class EqualizerApi {
 	}
 
 	public static int getBandLevel(int n) {
-		if ((EqualizerApi.mBandsValue == null)
-				|| (EqualizerApi.mBandsValue[n] == null))
+		if ((mBandsValue == null)
+				|| (mBandsValue[n] == null))
 			return 0;
-		return EqualizerApi.mBandsValue[n];
+		return mBandsValue[n];
 	}
 
 	public static boolean getBassBoostEnabled() {
-		return EqualizerApi.mBb.getEnabled();
+		return mBb.getEnabled();
 	}
 
 	public static boolean getReverbEnabled() {
-		return EqualizerApi.mRv.getEnabled();
+		return mRv.getEnabled();
+	}
+
+	public static boolean getLoudEnabled() {
+		return mLe.getEnabled();
 	}
 
 	public static short getReverbPreset() {
-		return EqualizerApi.mRv.getPreset();
+		return mRv.getPreset();
 	}
 
 	public static int getBassBoostStrength() {
-		return EqualizerApi.mBb.getRoundedStrength();
+		return mBb.getRoundedStrength();
 	}
 
 	public static boolean getEqualizerEnabled() {
-		return EqualizerApi.mEq.getEnabled();
+		return mEq.getEnabled();
 	}
 
 	public static int getMaxBandLevelRange() {
-		return EqualizerApi.mEq.getBandLevelRange()[1];
+		return mEq.getBandLevelRange()[1];
 	}
 
 	public static int getMinBandLevelRange() {
-		return EqualizerApi.mEq.getBandLevelRange()[0];
+		return mEq.getBandLevelRange()[0];
 	}
 
 	public static int getNumberOfBands() {
-		return (2 * EqualizerApi.mEq.getNumberOfBands());
+		return (2 * mEq.getNumberOfBands());
 	}
 
 	public static boolean getVirtualizerEnabled() {
-		return EqualizerApi.mVirt.getEnabled();
+		return mVirt.getEnabled();
 	}
 
 	public static int getVirtualizerStrength() {
-		return EqualizerApi.mVirt.getRoundedStrength();
+		return mVirt.getRoundedStrength();
 	}
 
 	public static void init(Integer integer) {
 		if (integer == null) {
-			integer = EqualizerApi.SESSION;
+			integer = SESSION;
 		}
-		EqualizerApi.mSession = integer;
-		EqualizerApi.mEq = new Equalizer(EqualizerApi.PRIORITY,
-				EqualizerApi.mSession.intValue());
-		EqualizerApi.mVirt = new Virtualizer(EqualizerApi.PRIORITY,
-				EqualizerApi.mSession.intValue());
-		EqualizerApi.mBb = new BassBoost(EqualizerApi.PRIORITY,
-				EqualizerApi.mSession.intValue());
-		EqualizerApi.mRv = new PresetReverb(EqualizerApi.PRIORITY,
-				EqualizerApi.mSession.intValue());
-		EqualizerApi.mBandsValue = new Integer[EqualizerApi.getNumberOfBands()];
+		mSession = integer;
+		mEq = new Equalizer(PRIORITY,
+				mSession);
+		mVirt = new Virtualizer(PRIORITY,
+				mSession);
+		mBb = new BassBoost(PRIORITY,
+				mSession);
+		mLe = new LoudnessEnhancer(mSession);
+//		mRv = new PresetReverb(PRIORITY,
+//				mSession);
+		mBandsValue = new Integer[getNumberOfBands()];
 	}
 
 	/*
@@ -123,44 +131,52 @@ public class EqualizerApi {
 	public static void setBandLevel(int n, int n2) {
 		double d;
 		double d2;
-		EqualizerApi.mBandsValue[n] = n2;
+		mBandsValue[n] = n2;
 		if (((n + 1) % 2) == 0) {
-			d = EqualizerApi.getBandLevel((n - 1));
-			d2 = EqualizerApi.getBandLevel(n);
+			d = getBandLevel((n - 1));
+			d2 = getBandLevel(n);
 		} else {
-			d = EqualizerApi.getBandLevel(n);
-			d2 = EqualizerApi.getBandLevel((n + 1));
+			d = getBandLevel(n);
+			d2 = getBandLevel((n + 1));
 		}
-		double d3 = (((EqualizerApi.getNumberOfBands()) / 2.0 - (n)) / 12.0);
+		double d3 = (((getNumberOfBands()) / 2.0 - (n)) / 12.0);
 		double d4 = (1.0 - d3);
 		double d5 = (1.0 + d3);
 		double d6 = (d > 0.0) ? ((d * d5)) : ((d / d4));
 		double d7 = (d2 > 0.0) ? ((d2 / d5)) : ((d2 * d4));
-		EqualizerApi.mEq.setBandLevel((short) (Math.ceil(((n / 2)))),
+		mEq.setBandLevel((short) (Math.ceil(((n / 2)))),
 				(short) (Math.ceil((((d6 + d7) / 2.0)))));
 	}
 
 	public static void setBassBoostEnabled(boolean bl) {
-		EqualizerApi.mBb.setEnabled(bl);
+		mBb.setEnabled(bl);
 	}
 
 	public static void setBassBoostStrength(int n) {
-		EqualizerApi.mBb.setStrength((short) (n));
+		mBb.setStrength((short) (n));
 	}
 
 	public static void setEqualizerEnabled(boolean bl) {
-		EqualizerApi.mEq.setEnabled(bl);
+		mEq.setEnabled(bl);
 	}
 
-	public static void setReverbEnabled(boolean bl) {
-		EqualizerApi.mRv.setEnabled(bl);
+	public static void setReverbEnabled(boolean bool) {
+		mRv.setEnabled(bool);
+	}
+
+	public static void setLoudEnabled(boolean bool) {
+		mLe.setEnabled(bool);
+	}
+
+	public static void setLoudGain(int gain) {
+		mLe.setTargetGain(gain);
 	}
 
 	public static void setVirtualizerEnabled(boolean bl) {
-		EqualizerApi.mVirt.setEnabled(bl);
+		mVirt.setEnabled(bl);
 	}
 
 	public static void setVirtualizerStrength(int n) {
-		EqualizerApi.mVirt.setStrength((short) (n));
+		mVirt.setStrength((short) (n));
 	}
 }
