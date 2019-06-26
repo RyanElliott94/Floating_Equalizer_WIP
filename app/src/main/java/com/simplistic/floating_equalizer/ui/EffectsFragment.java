@@ -67,6 +67,7 @@ public class EffectsFragment extends EqualizerSettings {
 				.getVirtualizerStrength());
 		mVirtualizerSeekBar.setEnabled(bl2);
 		boolean bl4 = EqualizerApi.getLoudEnabled();
+		mLoudSeekBar.setEnabled(bl4);
 		mLoudCheckbox.setChecked(bl4);
 	}
 

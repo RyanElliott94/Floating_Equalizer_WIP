@@ -17,14 +17,14 @@
         <item name="isMaterialTheme">true</item>
         <item name="colorAccent">@color/colorPrimary</item>
         <item name="android:colorAccent">@color/colorPrimary</item>
-        <item name="android:color">#fff</item>
+        <item name="android:color">#f7f7f7</item>
     </style>
 
     <style name="whiteStatus" parent="mainTheme">
-        <item name="android:colorControlNormal">#fff</item>
+        <item name="android:colorControlNormal">#f7f7f7</item>
         <item name="android:navigationBarColor">#243342</item>
         <item name="android:windowLightStatusBar">true</item>
-        <item name="android:statusBarColor">#fff</item>
+        <item name="android:statusBarColor">#f7f7f7</item>
     </style>
 
     <style name="optionTheme" parent="mainTheme">

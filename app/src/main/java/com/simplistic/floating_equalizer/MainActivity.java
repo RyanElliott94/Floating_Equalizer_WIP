@@ -74,7 +74,6 @@ public class MainActivity extends FragmentActivity implements
 	protected TabHost mTabHost;
 	protected TabPagerAdapter mTabPagerAdapter;
 	protected ViewPager mViewPager;
-	private NotificationUtils mNotificationUtils;
 
 	static {
 		MainActivity.EQUALIZER_TAB_TAG = "equalizer";
@@ -98,10 +97,6 @@ public class MainActivity extends FragmentActivity implements
 	public void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
 		this.setContentView(R.layout.main);
-
-
-
-		mNotificationUtils = new NotificationUtils(this);
 
 		Toolbar toolbar = findViewById(R.id.toolBar);
 		setActionBar(toolbar);
@@ -150,7 +145,7 @@ public class MainActivity extends FragmentActivity implements
 		editor.apply();
 
 
-		closeFloatingIfRunning(Floating.class.getName());
+		closeNotificationIfRunning(Floating.class.getName());
 	}
 
 	public void saveBands(){
@@ -167,9 +162,6 @@ public class MainActivity extends FragmentActivity implements
 		EqualizerApi.destroy();
 		DbHelper.getInstance(this).closeAdapter();
 		closeCursor();
-		Intent i = new Intent(getApplicationContext(), Floating.class);
-		stopService(i);
-		mNotificationUtils.getManager().cancelAll();
 		finish();
 	}
 
@@ -284,15 +276,13 @@ public class MainActivity extends FragmentActivity implements
 		Sure();
 	}
 
-	public boolean closeFloatingIfRunning(String serviceClassName){
+	public boolean closeNotificationIfRunning(String serviceClassName){
 		final ActivityManager activityManager = (ActivityManager)getSystemService(ACTIVITY_SERVICE);
 		final List<ActivityManager.RunningServiceInfo> services = activityManager.getRunningServices(Integer.MAX_VALUE);
-
 		for (ActivityManager.RunningServiceInfo runningServiceInfo : services) {
-			if (runningServiceInfo.service.getClassName().equals(serviceClassName)){
+			if (runningServiceInfo.service.getClassName().equals(serviceClassName) && runningServiceInfo.service != null){
 				Intent intent = new Intent(getApplicationContext(), Floating.class);
 				stopService(intent);
-				mNotificationUtils.getManager().cancelAll();
 				return true;
 			}
 		}

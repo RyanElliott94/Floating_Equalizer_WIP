@@ -56,7 +56,7 @@ BassBoost bb = null;
 CheckBox enabled = null;
 Equalizer eq;
     short[] r;
-private NotificationUtils mNotificationUtils;
+
 int max_level = getMaxBandLevelRange();
 int min_level = getMinBandLevelRange();
 int num_sliders = 0;
@@ -146,7 +146,7 @@ public void onCreate(Bundle savedInstanceState)
       setActionBar(toolbar);
       getActionBar().setDisplayShowTitleEnabled(false);
       getActionBar().setDisplayHomeAsUpEnabled(true);
-      mNotificationUtils = new NotificationUtils(this);
+
   enabled = findViewById(R.id.enabled);
   enabled.setOnCheckedChangeListener(this);
 
@@ -350,8 +350,9 @@ public void releaseEqualizer() {
     if (eq != null) {
        eq.release();
   }
-    if (bb == null)
-    bb.release();
+    if (bb != null) {
+        bb.release();
+    }
 }
 
 public int saveBass(){
@@ -493,7 +494,6 @@ public void Sure() {
             saveEqualizer();
             Intent intent = new Intent(getApplicationContext(), Floating.class);
             stopService(intent);
-            mNotificationUtils.getManager().cancelAll();
             releaseEqualizer();
             finish();
 
@@ -544,10 +544,9 @@ enabled.setChecked(eq.getEnabled());
         final List<ActivityManager.RunningServiceInfo> services = activityManager.getRunningServices(Integer.MAX_VALUE);
 
         for (ActivityManager.RunningServiceInfo runningServiceInfo : services) {
-            if (runningServiceInfo.service.getClassName().equals(serviceClassName)){
+            if (runningServiceInfo.service.getClassName().equals(serviceClassName) && runningServiceInfo.service != null){
                 Intent intent = new Intent(getApplicationContext(), Floating.class);
                 stopService(intent);
-                mNotificationUtils.getManager().cancelAll();
                 return true;
             }
         }
@@ -583,6 +582,16 @@ public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 
 }
 
+@Override
+public void onResume(){
+    super.onResume();
+    updateSliders();
+}
+@Override
+    public void onDestroy(){
+    super.onDestroy();
+    releaseEqualizer();
+}
 }
 
 

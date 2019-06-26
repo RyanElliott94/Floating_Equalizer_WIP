@@ -50,24 +50,25 @@ public class NotificationUtils extends ContextWrapper {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             Intent intent = new Intent(this, className);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            PendingIntent pi = PendingIntent.getActivity((this), (1000), (intent),
+            PendingIntent pi = PendingIntent.getActivity((this), (0), (intent),
                     PendingIntent.FLAG_UPDATE_CURRENT);
-            return new NotificationCompat.Builder(getApplicationContext(), ANDROID_CHANNEL_ID)
+            builder = new NotificationCompat.Builder(getApplicationContext(), ANDROID_CHANNEL_ID)
                     .setContentTitle(title)
                     .setContentText(body)
                     .setContentIntent(pi)
                     .setSmallIcon(R.mipmap.ic_launcher)
-                    .setAutoCancel(false);
+                    .setAutoCancel(true);
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+            notificationManager.notify(101, builder.build());
         }else{
-            Intent intent = new Intent(this, (className.getClass()));
+            Intent intent = new Intent(this, className);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            PendingIntent pendingIntent = PendingIntent.getActivity(this, 1000, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             builder = new NotificationCompat.Builder(this, ANDROID_CHANNEL_ID)
                     .setSmallIcon(R.mipmap.ic_launcher)
                     .setContentTitle(title)
                     .setContentText(body)
-                    .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .setContentIntent(pendingIntent)
                     .setAutoCancel(true);
             NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);

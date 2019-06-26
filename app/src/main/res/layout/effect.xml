@@ -21,12 +21,12 @@
                 <CheckBox android:id="@+id/bass_boost_enabled" 
                     android:layout_width="wrap_content" 
                     android:layout_height="wrap_content"
-                    android:textColor="#fff"
+                    android:textColor="#f7f7f7"
                     android:text="@string/bass_boost_enabled" />
                 
                 <TextView android:layout_width="wrap_content" 
                     android:layout_height="wrap_content"
-                    android:textColor="#fff"
+                    android:textColor="#f7f7f7"
                     android:text="@string/bass_boost_description" />
                 
                 <SeekBar android:id="@+id/bass_boost_val" 
@@ -47,12 +47,12 @@
                 <CheckBox android:id="@+id/virtualization_enabled" 
                     android:layout_width="wrap_content" 
                     android:layout_height="wrap_content"
-                    android:textColor="#fff"
+                    android:textColor="#f7f7f7"
                     android:text="@string/virtualization_enabled" />
                 
                 <TextView android:layout_width="wrap_content" 
                     android:layout_height="wrap_content"
-                    android:textColor="#fff"
+                    android:textColor="#f7f7f7"
                     android:text="@string/virtualization_description" />
                 
                 <SeekBar android:id="@+id/virtualization_val" 
@@ -73,12 +73,12 @@
                 <!--<CheckBox android:id="@+id/reverb_enabled"-->
                     <!--android:layout_width="wrap_content"-->
                     <!--android:layout_height="wrap_content"-->
-                    <!--android:textColor="#fff"-->
+                    <!--android:textColor="#f7f7f7"-->
                     <!--android:text="@string/virtualization_enabled" />-->
 
                 <!--<TextView android:layout_width="wrap_content"-->
                     <!--android:layout_height="wrap_content"-->
-                    <!--android:textColor="#fff"-->
+                    <!--android:textColor="#f7f7f7"-->
                     <!--android:text="@string/virtualization_description" />-->
 
                 <!--<Spinner-->
@@ -100,19 +100,18 @@
                 <CheckBox android:id="@+id/loud_enabled"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#fff"
+                    android:textColor="#f7f7f7"
                     android:text="@string/loud_enabled" />
 
                 <TextView android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#fff"
+                    android:textColor="#f7f7f7"
                     android:text="@string/loud_description" />
 
                 <SeekBar android:id="@+id/loud_val"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:max="1000"
-                    style="@style/thinSeekBar"
                     android:secondaryProgress="1000" />
 
             </LinearLayout>

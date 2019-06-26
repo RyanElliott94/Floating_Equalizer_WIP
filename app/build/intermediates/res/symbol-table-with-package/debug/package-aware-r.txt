@@ -85,6 +85,9 @@ attr actionProviderClass
 attr actionTextColorAlpha
 attr actionViewClass
 attr activityChooserViewStyle
+attr adSize
+attr adSizes
+attr adUnitId
 attr alertDialogButtonGroupStyle
 attr alertDialogCenterButtons
 attr alertDialogStyle
@@ -683,6 +686,10 @@ color bright_foreground_inverse_material_dark
 color bright_foreground_inverse_material_light
 color bright_foreground_material_dark
 color bright_foreground_material_light
+color browser_actions_bg_grey
+color browser_actions_divider_color
+color browser_actions_text_color
+color browser_actions_title_color
 color button_material_dark
 color button_material_light
 color cardview_dark_background
@@ -919,6 +926,8 @@ dimen abc_text_size_title_material
 dimen abc_text_size_title_material_toolbar
 dimen action_bar_size
 dimen appcompat_dialog_background_inset
+dimen browser_actions_context_menu_max_width
+dimen browser_actions_context_menu_min_padding
 dimen cardview_compat_inset_shadow
 dimen cardview_default_elevation
 dimen cardview_default_radius
@@ -1275,8 +1284,6 @@ drawable img_seekbar_bg
 drawable launcher
 drawable launcher_bev
 drawable launcher_trans
-drawable leaf_blur
-drawable leaf_blur_crop
 drawable mtrl_dialog_background
 drawable mtrl_dropdown_arrow
 drawable mtrl_ic_arrow_drop_down
@@ -1285,6 +1292,7 @@ drawable mtrl_ic_cancel
 drawable mtrl_popupmenu_background
 drawable mtrl_popupmenu_background_dark
 drawable mtrl_tabs_default_indicator
+drawable music
 drawable navigation_empty_icon
 drawable notification_action_background
 drawable notification_bg
@@ -1298,24 +1306,15 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
-drawable playlist_bg
-drawable river_blur
-drawable river_no_blur
 drawable seek_green
 drawable seek_handler
 drawable seek_white
 drawable seekbar_progress
-drawable seekbar_progress5
 drawable settings_18dp
-drawable switch_custom
 drawable test_custom_background
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
-drawable unchecked
-drawable unchecked2
 drawable white_line_but
-drawable wood_no_blur
-drawable woods_blur
 font audiowide
 font gruppo
 id ALT
@@ -1401,6 +1400,11 @@ id bass_layout
 id beginning
 id blocking
 id bottom
+id browser_actions_header_text
+id browser_actions_menu_item_icon
+id browser_actions_menu_item_text
+id browser_actions_menu_items
+id browser_actions_menu_view
 id buttonPanel
 id calendar_days_header
 id cancel_action
@@ -1728,6 +1732,8 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout browser_actions_context_menu_page
+layout browser_actions_context_menu_row
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
@@ -1807,6 +1813,7 @@ menu home_menu
 menu main
 menu profile
 menu static_menu
+mipmap ic_launcher
 plurals mtrl_badge_content_description
 string Reset
 string abc_action_bar_home_description
@@ -1851,6 +1858,7 @@ string character_counter_overflowed_content_description
 string character_counter_pattern
 string chip_text
 string clear_text_end_icon_content_description
+string common_google_play_services_unknown_issue
 string delete_profile
 string edit_profile
 string effects_title
@@ -1867,6 +1875,8 @@ string hide_bottom_view_on_scroll_behavior
 string icon_content_description
 string info
 string info2
+string loud_description
+string loud_enabled
 string mini
 string mtrl_badge_numberless_content_description
 string mtrl_chip_close_icon_content_description
@@ -1899,6 +1909,13 @@ string reverbpreset_mediumroom
 string reverbpreset_none
 string reverbpreset_plate
 string reverbpreset_smallroom
+string s1
+string s2
+string s3
+string s4
+string s5
+string s6
+string s7
 string search_menu_title
 string select_music_sample
 string status_bar_notification_info_overflow
@@ -2297,6 +2314,7 @@ style Theme_Design_Light
 style Theme_Design_Light_BottomSheetDialog
 style Theme_Design_Light_NoActionBar
 style Theme_Design_NoActionBar
+style Theme_IAPTheme
 style Theme_MaterialComponents
 style Theme_MaterialComponents_BottomSheetDialog
 style Theme_MaterialComponents_Bridge
@@ -2560,6 +2578,7 @@ style Widget_MaterialComponents_Toolbar_Surface
 style Widget_Support_CoordinatorLayout
 style blueStatus
 style mainTheme
+style optionTheme
 style thinSeekBar
 style whiteStatus
 styleable ActionBar background backgroundSplit backgroundStacked contentInsetEnd contentInsetEndWithActions contentInsetLeft contentInsetRight contentInsetStart contentInsetStartWithNavigation customNavigationLayout displayOptions divider elevation height hideOnContentScroll homeAsUpIndicator homeLayout icon indeterminateProgressStyle itemPadding logo navigationMode popupTheme progressBarPadding progressBarStyle subtitle subtitleTextStyle title titleTextStyle
@@ -2568,6 +2587,7 @@ styleable ActionMenuItemView android_minWidth
 styleable ActionMenuView
 styleable ActionMode background backgroundSplit closeItemLayout height subtitleTextStyle titleTextStyle
 styleable ActivityChooserView expandActivityOverflowButtonDrawable initialActivityCount
+styleable AdsAttrs adSize adSizes adUnitId
 styleable AlertDialog android_layout buttonIconDimen buttonPanelSideLayout listItemLayout listLayout multiChoiceItemLayout showTitle singleChoiceItemLayout
 styleable AnimatedStateListDrawableCompat android_dither android_visible android_variablePadding android_constantSize android_enterFadeDuration android_exitFadeDuration
 styleable AnimatedStateListDrawableItem android_id android_drawable

@@ -32,7 +32,7 @@ public class Floating extends Service {
 		return null;
 	}
 
-	ImageView chatHead;
+	ImageView eqBubble;
 	WindowManager windowManager;
 	private EqualizerActivity mainEQ;
 	PopupMenu popup;
@@ -41,10 +41,7 @@ public class Floating extends Service {
 	String basicEQ;
 	String advanceEQ;
 	WindowManager.LayoutParams myParams;
-	/*
-	 * Enabled aggressive block sorting
-	 * Enabled unnecessary exception pruning
-	 */
+
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
@@ -60,11 +57,12 @@ public class Floating extends Service {
 
 		mNotificationUtils = new NotificationUtils(this);
 
-		chatHead = new ImageView(this);
-		//a face floating bubble as imageView
-		chatHead.setImageResource(R.mipmap.ic_launcher);
+		eqBubble = new ImageView(this);
+		eqBubble.setImageResource(R.mipmap.ic_launcher);
+		eqBubble.setMinimumWidth(200);
+		eqBubble.setMinimumHeight(200);
 		windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
-		//here is all the science of params
+
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 			myParams = new WindowManager.LayoutParams(
@@ -82,32 +80,22 @@ public class Floating extends Service {
 					PixelFormat.TRANSLUCENT);
 		}
 
-		myParams.gravity = Gravity.TOP | Gravity.LEFT;
+		myParams.gravity = Gravity.TOP;
 		myParams.x = 0;
 		myParams.y = 100;
-		// add a floatingfacebubble icon in window
-		windowManager.addView(chatHead, myParams);
+		windowManager.addView(eqBubble, myParams);
 		try {
-			//for moving the picture on touch and slide
-			chatHead.setOnTouchListener(new View.OnTouchListener() {
-				WindowManager.LayoutParams paramsT = myParams;
+
+			eqBubble.setOnTouchListener(new View.OnTouchListener() {
 				private int initialX;
 				private int initialY;
 				private float initialTouchX;
 				private float initialTouchY;
-				private long touchStartTime = 0;
 
 				@Override
 				public boolean onTouch(View v, MotionEvent event) {
-					//remove face bubble on long press
-					if (System.currentTimeMillis() - touchStartTime > ViewConfiguration.getLongPressTimeout() && initialTouchX == event.getX()) {
-						windowManager.removeView(chatHead);
-						stopSelf();
-						return false;
-					}
 					switch (event.getAction()) {
 						case MotionEvent.ACTION_DOWN:
-							touchStartTime = System.currentTimeMillis();
 							initialX = myParams.x;
 							initialY = myParams.y;
 							initialTouchX = event.getRawX();
@@ -128,7 +116,7 @@ public class Floating extends Service {
 			e.printStackTrace();
 		}
 
-		popup = new PopupMenu(getApplicationContext(), chatHead);
+		popup = new PopupMenu(getApplicationContext(), eqBubble);
 		//Inflating the Popup using xml file
 		popup.getMenuInflater().inflate(R.menu.bubble_menu, popup.getMenu());
 
@@ -143,40 +131,36 @@ public class Floating extends Service {
 						hideIcon();
 						break;
 					case R.id.stop:
-						windowManager.removeView(chatHead);
-						stopForeground(true);
+						stopSelf();
 						break;
 				}
 				return true;
 			}
 		});
 
-		chatHead.setOnLongClickListener(new View.OnLongClickListener() {
-
+		eqBubble.setOnLongClickListener(new View.OnLongClickListener() {
 			public boolean onLongClick(View view) {
-//				windowManager.addView(popup, myParams);
-				popup.show();
+				if(eqBubble != null){
+					popup.show();
+				}
 				return false;
 			}
 		});
-
 	}
 
 	public void hideIcon() {
 		if (basicEQ != null && basicEQ.equals("isFromBasic")) {
-			Toast.makeText(getApplicationContext(), "Hello basicEQ", Toast.LENGTH_LONG).show();
 			nb = mNotificationUtils.
 					getAndroidChannelNotification("Floating Equalizer", "Running", EqualizerActivity.class);
 			mNotificationUtils.getManager().notify(101, nb.build());
-			chatHead.setVisibility(View.GONE);
-			stopForeground(true);
+			eqBubble.setVisibility(View.GONE);
+			stopSelf();
 		} else if (advanceEQ != null && advanceEQ.equals("isFromAdvance")) {
-			Toast.makeText(getApplicationContext(), "Hello advancedEQ", Toast.LENGTH_LONG).show();
 			nb = mNotificationUtils.
 					getAndroidChannelNotification("Floating Equalizer", "Running", MainActivity.class);
 			mNotificationUtils.getManager().notify(101, nb.build());
-			chatHead.setVisibility(View.GONE);
-			stopForeground(true);
+			eqBubble.setVisibility(View.GONE);
+			stopSelf();
 		}
 	}
 
@@ -192,19 +176,11 @@ public class Floating extends Service {
 		}
 	}
 
-	public void removeButton() {
-		if (chatHead != null) {
-			windowManager.removeView(chatHead);
-		}
-
-	}
-
 	public void onDestroy() {
 		super.onDestroy();
-		if (chatHead != null) {
-			windowManager.removeView(chatHead);
-
+		if (eqBubble != null) {
+			windowManager.removeView(eqBubble);
+			stopForeground(true);
 		}
-		stopForeground(true);
 	}
 }

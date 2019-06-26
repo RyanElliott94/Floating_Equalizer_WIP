@@ -10,10 +10,10 @@
     </style>
 
     <style name="whiteStatus" parent="mainTheme">
-        <item name="android:colorControlNormal">#fff</item>
+        <item name="android:colorControlNormal">#f7f7f7</item>
         <item name="android:navigationBarColor">#243342</item>
         <item name="android:enforceStatusBarContrast">true</item>
         <item name="android:windowLightStatusBar">true</item>
-        <item name="android:statusBarColor">#fff</item>
+        <item name="android:statusBarColor">#f7f7f7</item>
     </style>
 </resources>

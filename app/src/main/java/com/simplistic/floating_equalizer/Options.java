@@ -12,6 +12,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 
 /* ID's:
  * topHalf
@@ -27,14 +31,19 @@ public class Options extends Activity implements OnClickListener {
 	private TextView advanced;
 	private TextView whatsBasic;
 	private TextView whatsAdvanced;
+	private AdView mAdView;
 
 	@Override
 	public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.options);
-        
-        
 
+		MobileAds.initialize(this, "ca-app-pub-7041676438054720~4748415693");
+
+		mAdView = findViewById(R.id.adView);
+		AdRequest adRequest = new AdRequest.Builder().build();
+		mAdView.loadAd(adRequest);
+		
         basic = findViewById(R.id.basic);
         advanced = findViewById(R.id.advanced);
         whatsBasic = findViewById(R.id.whatBasic);
@@ -61,7 +70,7 @@ public class Options extends Activity implements OnClickListener {
 	        builder.setTitle(("Basic Info"));
 	        builder.setMessage("Basic: Basic consists of between 5-6 bands a long with stock presets.");
 	        builder.setCancelable(true);
-	        builder.setIcon(R.drawable.ic_launcher);
+	        builder.setIcon(R.mipmap.ic_launcher);
 	        builder.setPositiveButton("Okay", (new DialogInterface.OnClickListener(){
 
 	            @Override
@@ -77,7 +86,7 @@ public class Options extends Activity implements OnClickListener {
 	        builder.setTitle(("Advanced Info"));
 	        builder.setMessage("Advanced: Advanced consists of 10 bands along with the ability to create, edit and delete custom presets, it also saves your settings to save having to re-adjust the sliders");
 	        builder.setCancelable(true);
-	        builder.setIcon(R.drawable.ic_launcher);
+	        builder.setIcon(R.mipmap.ic_launcher);
 	        builder.setPositiveButton("Okay", new DialogInterface.OnClickListener(){
 
 	            @Override
