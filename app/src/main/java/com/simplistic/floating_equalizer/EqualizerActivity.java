@@ -33,6 +33,9 @@ import android.widget.Toolbar;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.simplistic.floating_equalizer.service.Floating;
 
@@ -69,11 +72,12 @@ private String[] music_styles;
 
 private ListView list;
 private TextView preset;
+    private AdView mAdView;
 
 
-/*=============================================================================
-formatBandLabel
-=============================================================================*/
+    /*=============================================================================
+    formatBandLabel
+    =============================================================================*/
 public String formatBandLabel (int[] band)
 {
 return milliHzToString(band[0]) + "-" + milliHzToString(band[1]);
@@ -147,6 +151,12 @@ public void onCreate(Bundle savedInstanceState)
       getActionBar().setDisplayShowTitleEnabled(false);
       getActionBar().setDisplayHomeAsUpEnabled(true);
 
+      MobileAds.initialize(this, "ca-app-pub-7041676438054720~4748415693");
+
+      mAdView = findViewById(R.id.adView);
+      AdRequest adRequest = new AdRequest.Builder().build();
+      mAdView.loadAd(adRequest);
+      
   enabled = findViewById(R.id.enabled);
   enabled.setOnCheckedChangeListener(this);
 

@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.simplistic.floating_equalizer"
-    android:versionCode="8"
-    android:versionName="2.0"
+    android:versionCode="21"
+    android:versionName="2.1"
     >
 
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -17,6 +17,7 @@
         android:label="@string/app_name"
         tools:ignore="GoogleAppIndexingWarning"
         android:theme="@style/mainTheme">
+
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-7041676438054720~4748415693"/>

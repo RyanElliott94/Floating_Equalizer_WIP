@@ -48,6 +48,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.simplistic.floating_equalizer.model.EqualizerApi;
 import com.simplistic.floating_equalizer.model.Profile;
@@ -81,7 +84,8 @@ public class MainActivity extends FragmentActivity implements
 		MainActivity.EFFECT_TAB_TAG = "effect";
 	}
 
-	
+	private AdView mAdView;
+
 
 	protected Fragment instantiateFragment(Class<?> class_, Bundle bundle) {
 		return Fragment.instantiate((this), (class_.getName()), (bundle));
@@ -144,7 +148,12 @@ public class MainActivity extends FragmentActivity implements
 		editor.putBoolean(EqualizerApi.PREF_AUTOSTART, true);
 		editor.apply();
 
+		MobileAds.initialize(this, "ca-app-pub-7041676438054720~4748415693");
 
+		mAdView = findViewById(R.id.adView);
+		AdRequest adRequest = new AdRequest.Builder().build();
+		mAdView.loadAd(adRequest);
+		
 		closeNotificationIfRunning(Floating.class.getName());
 	}
 
